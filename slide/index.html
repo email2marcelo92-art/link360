@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação link360 - Capa Atualizada</title>
+    <!-- Incluindo uma fonte moderna (Poppins) --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Adicionado Font Awesome para ícones no slide do dashboard --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Cores do link360 (Paleta Roxa e Lavanda) */
+        :root {
+            --link360-purple: #4A14E0;
+            --link360-light-purple: #6c4af5;
+            --link360-lavender: #7b68ee; /* Destaque de cor (Lilás/Lavanda) */
+            --link360-background: #F4F7FF;
+            --link360-text: #2c2c2c;
+            --link360-dark-text: #1A1A1A;
+            --link360-card-border: #E0E4EB;
+            --link360-success: #5cb85c;
+            --link360-error: #F44336;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--link360-background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container que simula a tela do celular */
+        .app-container {
+            width: 100%;
+            max-width: 450px; 
+            height: 100vh;
+            max-height: 850px; 
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden; 
+            cursor: pointer; 
+        }
+
+        /* Estilo geral dos slides */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px 25px;
+            box-sizing: border-box;
+            flex-direction: column;
+            justify-content: space-between;
+            
+            /* Estado padrão (invisível) */
+            display: none; 
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            
+            background-color: var(--link360-background);
+        }
+
+        .slide.active {
+            /* Estado ativo (visível) */
+            display: flex; 
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Estilos de Tipografia */
+        .header-logo {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--link360-dark-text);
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .link360-title {
+            font-size: 2.2em;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--link360-purple);
+            margin-bottom: 15px;
+        }
+
+        .link360-title.highlight-lavender {
+            color: var(--link360-lavender);
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05); 
+        }
+
+        .link360-subtitle {
+            font-size: 1em;
+            font-weight: 400;
+            color: var(--link360-text);
+            line-height: 1.4;
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+
+        /* Botão estilo App */
+        .link360-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .primary-button {
+            background-color: var(--link360-light-purple);
+            color: white;
+            box-shadow: 0 4px 10px rgba(74, 20, 224, 0.3);
+        }
+
+        .primary-button:hover {
+            background-color: var(--link360-purple);
+        }
+
+        /* Indicador de Slides (Dots e Contador) */
+        .slide-indicator {
+            text-align: center;
+            padding-bottom: 20px;
+            pointer-events: all;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .slide-counter-text {
+            font-size: 0.8em;
+            color: var(--link360-text);
+            margin-bottom: 8px; /* Espaço entre o contador e os dots */
+            font-weight: 600;
+        }
+
+        .dots-wrapper {
+            display: flex;
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            margin: 0 4px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s, width 0.3s, border-radius 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--link360-purple);
+            width: 16px; 
+            border-radius: 4px;
+        }
+
+        /* MOCKUPS DE TELA/CARDS */
+        .link360-card-mockup, .link360-approval-mockup, .link360-card-metric, 
+        .link360-list-mockup, .link360-agenda-mockup, .link360-profile-mockup,
+        .link360-dashboard-summary-mockup { 
+            width: 90%;
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+            text-align: left;
+            pointer-events: none;
+        }
+
+        .link360-card-mockup, .link360-card-metric, .link360-agenda-mockup {
+            padding: 20px;
+        }
+
+        .card-header {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--link360-dark-text);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--link360-card-border);
+            padding-bottom: 10px;
+            pointer-events: none;
+        }
+        
+        /* Estilos específicos dos mockups (Toggles, Listas, Métricas, etc.) */
+        .toggle-list { list-style: none; padding: 0; margin: 0; }
+        .toggle-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 0.95em; color: var(--link360-text); pointer-events: none; }
+        .toggle { width: 35px; height: 20px; background-color: #ccc; border-radius: 10px; position: relative; transition: background-color 0.3s; pointer-events: none; }
+        .toggle.active { background-color: var(--link360-light-purple); }
+        .toggle::before { content: ''; position: absolute; width: 14px; height: 14px; background-color: white; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.3s; pointer-events: none; }
+        .toggle.active::before { transform: translateX(15px); }
+        
+        .item-solicitacao { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid var(--link360-card-border); font-size: 0.9em; color: var(--link360-text); align-items: center; pointer-events: none; }
+        .item-solicitacao.approved { background-color: #f7fff2; border-radius: 8px; }
+        .item-solicitacao.approved .check { color: white; background-color: var(--link360-success); border-radius: 50%; padding: 2px 4px; font-size: 0.8em; font-weight: bold; }
+        
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; pointer-events: none; }
+        .metric-card { background: var(--link360-background); border-radius: 8px; padding: 15px; text-align: center; border: 1px solid var(--link360-card-border); pointer-events: none; }
+
+        .list-header { display: flex; padding: 10px 15px; font-size: 0.75em; color: #999; font-weight: 600; pointer-events: none; }
+        .list-item { display: flex; padding: 12px 15px; border-bottom: 1px solid var(--link360-card-border); font-size: 0.9em; color: var(--link360-text); pointer-events: none; }
+        
+        /* CSS Agenda */
+        .agenda-item { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--link360-card-border); }
+        .agenda-item:last-child { border-bottom: none; }
+        .event-time-bar { width: 4px; height: 40px; background-color: var(--link360-lavender); border-radius: 2px; margin-right: 15px; }
+        .event-details { flex-grow: 1; }
+        .event-details strong { display: block; color: var(--link360-dark-text); font-size: 0.95em; }
+        .event-details span { color: var(--link360-text); font-size: 0.85em; }
+        .reminder-icon { font-size: 1.2em; color: var(--link360-purple); }
+
+        /* CSS Splash Screen (Slide 1 - Capa) */
+        #slide-1 {
+            background-color: var(--link360-lavender); /* Cor de fallback */
+            background-image: url('https://i.ibb.co/Qs2XN37/1slade.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            justify-content: center;
+            align-items: center;
+            padding: 0; /* Remove padding para a imagem preencher */
+        }
+        /* Conteúdo do slide 1 é removido, mas os estilos são mantidos para contexto */
+        .link360-splash-title { display: none; } 
+        .link360-splash-slogan { display: none; }
+        
+        /* CSS Financeiro */
+        .financeiro-summary {
+            text-align: center; 
+            margin-top: 10px; 
+            padding-top: 10px; 
+            border-top: 1px dashed #eee;
+        }
+
+        /* CSS Marketing */
+        .campaign-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--link360-background);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 5px solid; /* Cor do status */
+        }
+        .campaign-item strong {
+            font-size: 0.95em;
+            color: var(--link360-dark-text);
+            font-weight: 700;
+            display: block;
+        }
+        .campaign-item span {
+            font-size: 0.8em;
+            color: var(--link360-text);
+        }
+        .campaign-status-color-purple { border-left-color: var(--link360-purple); }
+        .campaign-status-color-lavender { border-left-color: var(--link360-lavender); }
+        .campaign-status-color-success { border-left-color: var(--link360-success); }
+
+        /* CSS Clientes */
+        .link360-profile-mockup { padding: 0; overflow: hidden; }
+        .link360-profile-mockup .card-header { display: flex; align-items: center; border-bottom: 1px solid var(--link360-card-border); padding: 20px; margin-bottom: 0; background-color: var(--link360-background); }
+        .profile-avatar { width: 45px; height: 45px; background-color: var(--link360-purple); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: 700; margin-right: 15px; }
+        .profile-info strong { display: block; color: var(--link360-dark-text); font-size: 1.1em; }
+        .profile-info span { font-size: 0.9em; color: var(--link360-text); }
+        .profile-details { padding: 20px; }
+        .profile-details strong { font-size: 0.9em; color: var(--link360-dark-text); font-weight: 700; margin-top: 10px; display: block; }
+        .profile-details p { font-size: 0.9em; color: var(--link360-text); margin: 5px 0 0 0; }
+        
+        
+        /* CSS para o Dashboard (Slide 2) */
+        .link360-dashboard-summary-mockup {
+            padding: 0; 
+        }
+        .link360-dashboard-summary-mockup .card-header {
+             padding: 20px;
+        }
+        .dashboard-list {
+            list-style: none;
+            padding: 0 20px 20px 20px; 
+            margin: 0;
+        }
+        .dashboard-list li {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+            color: var(--link360-text);
+            font-weight: 600;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--link360-card-border);
+        }
+        .dashboard-list li:last-child {
+            border-bottom: none;
+        }
+        .dashboard-list li .icon-wrapper {
+            margin-right: 15px;
+            color: var(--link360-purple);
+            width: 20px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        /* CSS para Ficha Técnica (Slide 6) */
+        .cost-breakdown-list {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+        }
+        .cost-breakdown-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            font-size: 0.9em;
+            color: #666; 
+            padding: 8px 0; 
+            border-bottom: 1px dashed #eee;
+        }
+        .cost-breakdown-list li:last-child {
+            border-bottom: none;
+        }
+        .cost-breakdown-list strong {
+            color: var(--link360-dark-text);
+            font-weight: 600;
+        }
+        .cost-summary {
+            border-top: 1px solid var(--link360-card-border); 
+            margin-top: 20px; 
+            padding-top: 15px; 
+            text-align: center;
+        }
+
+        /* CSS para Cardápio Link360 (Slide 7) */
+        .menu-item-card {
+            background-color: var(--link360-background);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--link360-card-border);
+            pointer-events: none;
+        }
+        .menu-item-details {
+            text-align: left;
+        }
+        .menu-item-details strong {
+            color: var(--link360-dark-text);
+            font-size: 1em;
+            font-weight: 700;
+        }
+        .menu-item-details span {
+            display: block;
+            color: #666;
+            font-size: 0.85em;
+        }
+        .whatsapp-icon {
+            font-size: 1.5em;
+            color: #25D366; /* WhatsApp Green */
+            margin-left: 15px;
+        }
+
+        /* CSS: Slide de Finalização (Slide 13) */
+        .closing-tagline {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--link360-purple);
+            line-height: 1.4;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid var(--link360-lavender);
+        }
+        .closing-tagline strong {
+            color: var(--link360-purple);
+            font-weight: 800;
+            font-size: 1.2em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container" id="appContainer">
+        
+        <!-- Slide 1 (Capa - Com Imagem de Fundo) -->
+        <div class="slide slide-1 active" id="slide-1">
+            <div class="content">
+                <!-- Conteúdo de texto oculto, a imagem faz o trabalho -->
+                <h1 class="link360-splash-title">link360</h1>
+                <p class="link360-splash-slogan">Tudo o que você precisa, a um clique.</p>
+            </div>
+        </div>
+
+        <!-- Slide 2 (Dashboard Inteligente - Original 10) -->
+        <div class="slide slide-10" id="slide-10">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title">Dashboard Inteligente</h1>
+                <p class="link360-subtitle">
+                    Avisos, tarefas, finanças, mídias sociais e equipe, tudo em um só lugar.
+                </p>
+                
+                <div class="link360-dashboard-summary-mockup">
+                    <div class="card-header" style="padding: 20px;">Resumo do Dia</div>
+                    <ul class="dashboard-list">
+                        <li>
+                            <span class="icon-wrapper"><i class="fas fa-bell" style="color: #FFC107;"></i></span>
+                            2 Avisos Novos
+                        </li>
+                        <li>
+                            <span class="icon-wrapper"><i class="fas fa-tasks" style="color: var(--link360-success);"></i></span>
+                            3 Tarefas Pendentes
+                        </li>
+                        <li>
+                            <span class="icon-wrapper"><i class="fas fa-file-invoice-dollar" style="color: var(--link360-error);"></i></span>
+                            1 Boleto Vence Hoje
+                        </li>
+                        <li>
+                            <span class="icon-wrapper"><i class="fab fa-instagram" style="color: #E1306C;"></i></span>
+                            4 Comentários (Instagram)
+                        </li>
+                        <li>
+                            <span class="icon-wrapper"><i class="fas fa-shopping-cart" style="color: var(--link360-lavender);"></i></span>
+                            Lista de Compras: Pedir Café
+                        </li>
+                         <li>
+                            <span class="icon-wrapper"><i class="fas fa-users" style="color: #2196F3;"></i></span>
+                            Equipe do Dia: 2 Presentes, 1 Folga
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter10" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 (Simplifique os processos - Original 2) -->
+        <div class="slide slide-2" id="slide-2">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                 <h1 class="link360-title">Simplifique os processos do seu negócio</h1>
+                <p class="link360-subtitle" style="margin-top: 15px;">
+                    Plataforma intuitiva, simples e fácil de usar. Customizável para as necessidades da sua empresa.
+                </p>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter2" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 (Porque cada empresa é única - Original 3) -->
+        <div class="slide slide-3" id="slide-3">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title">Porque cada empresa é única.</h1>
+                <p class="link360-subtitle">Personalizar seus processos é necessário</p>
+                
+                <div class="link360-card-mockup">
+                    <div class="card-header">Importar</div>
+                    <ul class="toggle-list">
+                        <li>Salário <span class="toggle active"></span></li>
+                        <li>Vale transporte <span class="toggle"></span></li>
+                        <li>Vale Alimentação <span class="toggle"></span></li>
+                        <li>Férias <span class="toggle active"></span></li>
+                        <li>Horas extras <span class="toggle active"></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter3" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 (Processos Customizáveis - Original 4) -->
+        <div class="slide slide-4" id="slide-4">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title highlight-lavender">Processos Customizáveis</h1>
+                <p class="link360-subtitle">
+                    Criação de fluxos específicos para reembolsos, gestão de ativos, desligamentos, entre outros, totalmente personalizável.
+                </p>
+                   <div class="link360-approval-mockup">
+                    <div class="card-header">Solicitações</div>
+                    <div class="item-solicitacao">
+                        <span class="nome">Sandra H. da Silveira</span>
+                        <span class="data">12/12/2025</span>
+                    </div>
+                     <div class="item-solicitacao approved">
+                        <span class="nome">João P. Silveira</span>
+                        <span class="data">07/08/2025</span>
+                        <span class="check">✔</span>
+                    </div>
+                    <div class="item-solicitacao">
+                        <span class="nome">Miguel O. Torres</span>
+                        <span class="data">20/11/2025</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter4" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6 (Ficha Técnica e Custos - Original 11) -->
+        <div class="slide slide-11" id="slide-11">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title">Ficha Técnica e Custos</h1>
+                <p class="link360-subtitle">
+                    Calcule o custo exato de cada item de sushi (Combinado, Hot Rolls, Sashimi) com base no preço atual dos ingredientes.
+                </p>
+                
+                <div class="link360-card-mockup" style="padding: 20px;">
+                    <div class="card-header">Custo Combinado Especial (40 Peças)</div>
+                    <ul class="cost-breakdown-list">
+                        <li>
+                            <strong>Arroz Japonês (0.5kg)</strong> 
+                            <span>R$ 4,50</span>
+                        </li>
+                        <li>
+                            <strong>Salmão (0.4kg)</strong> 
+                            <span style="color: var(--link360-error);">R$ 18,20</span>
+                        </li>
+                        <li>
+                            <strong>Cream Cheese</strong> 
+                            <span>R$ 3,10</span>
+                        </li>
+                        <li>
+                            <strong>Nori/Molho/Embalagem</strong> 
+                            <span>R$ 4,90</span>
+                        </li>
+                    </ul>
+                    <div class="cost-summary">
+                        <p style="margin: 0; font-size: 0.9em; color: var(--link360-text);">Custo Total da Produção (CMV)</p>
+                        <strong style="font-size: 1.5em; color: var(--link360-purple);">R$ 30,70</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8em; color: var(--link360-success); font-weight: 700;">Margem Recomendada: R$ 45,00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter11" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7 (Cardápio Link360 - Original 12) -->
+        <div class="slide slide-12" id="slide-12">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title highlight-lavender">Cardápio Link360</h1>
+                <p class="link360-subtitle">
+                    Monte, edite e organize seu cardápio. Receba pedidos direto pelo WhatsApp, sem taxas de marketplace.
+                </p>
+                
+                <div class="link360-card-mockup" style="padding: 20px;">
+                    <div class="card-header">Combinados e Categorias</div>
+                    <div class="menu-item-card">
+                        <div class="menu-item-details">
+                            <strong>Combo Salmão Nobre (30 Peças)</strong>
+                            <span>Organizado em: Hots, Niguiris, Uramakis</span>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon"></i>
+                    </div>
+                    <div class="menu-item-card">
+                         <div class="menu-item-details">
+                            <strong>Hot Philadelphia Rolls</strong>
+                            <span>Categorizado como: Rolinho Quente</span>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon"></i>
+                    </div>
+                    <div class="menu-item-card">
+                         <div class="menu-item-details">
+                            <strong>Temaki Salmão Grelhado</strong>
+                            <span>Disponível para: Pedido Rápido</span>
+                        </div>
+                        <i class="fab fa-whatsapp whatsapp-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter12" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8 (Gestão de Documentos - Original 5) -->
+        <div class="slide slide-5" id="slide-5">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title">Gestão de Documentos</h1>
+                <p class="link360-subtitle">
+                    Inclusão de contratos e documentos que são preenchidos automaticamente com os dados dos colaboradores.
+                </p>
+                <div class="link360-approval-mockup">
+                    <div class="card-header">Documentos Recentes</div>
+                    <div class="item-solicitacao" style="justify-content: space-between; padding: 15px 10px;">
+                        <span>Contrato Admissional (Novo)</span>
+                        <span style="color: var(--link360-purple); font-weight: 600;">Abrir PDF</span>
+                    </div>
+                     <div class="item-solicitacao" style="justify-content: space-between; padding: 15px 10px;">
+                        <span>Termo de Férias (2025)</span>
+                        <span style="color: var(--link360-purple); font-weight: 600;">Assinar</span>
+                    </div>
+                    <div class="item-solicitacao" style="justify-content: space-between; padding: 15px 10px; border-bottom: none;">
+                        <span>Declaração de Vínculo</span>
+                        <span style="color: var(--link360-purple); font-weight: 600;">Baixar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter5" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 9 (Agenda e Lembretes - Original 6) -->
+        <div class="slide slide-6" id="slide-6">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title highlight-lavender">Agenda e Lembretes</h1>
+                <p class="link360-subtitle">
+                    Nunca perca um prazo ou compromisso importante com a agenda integrada.
+                </p>
+                
+                <div class="link360-agenda-mockup">
+                    <div class="card-header">Hoje, 16 de Nov</div>
+                    <div class="agenda-item">
+                        <div class="event-time-bar"></div>
+                        <div class="event-details">
+                            <strong>Reunião de Alinhamento DP/RH</strong>
+                            <span>10:00 - 10:30 (Online)</span>
+                        </div>
+                        <div class="reminder-icon">🔔</div>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="event-time-bar" style="background-color: var(--link360-success);"></div>
+                        <div class="event-details">
+                            <strong>Entrega de Holerites</strong>
+                            <span>Prazo Final - 14:00</span>
+                        </div>
+                        <div class="reminder-icon">✅</div>
+                    </div>
+                    <div class="agenda-item" style="border-bottom: none;">
+                        <div class="event-time-bar" style="background-color: #f0ad4e;"></div>
+                        <div class="event-details">
+                            <strong>Reembolso de Despesas (Prazo)</strong>
+                            <span>Sistema fecha às 17:00</span>
+                        </div>
+                        <div class="reminder-icon">📝</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter6" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 10 (Financeiro Integrado - Original 7) -->
+        <div class="slide slide-7" id="slide-7">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title">Financeiro Integrado</h1>
+                <p class="link360-subtitle">
+                    Visão 360º de despesas, receitas e fluxo de caixa, garantindo a saúde financeira do seu negócio.
+                </p>
+                
+                <div class="link360-card-metric" style="width: 90%;">
+                    <div class="card-header">Resumo Financeiro (Nov/2025)</div>
+                    <div class="metric-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                        <div class="metric-card">
+                            <p style="font-size: 0.7em; color: var(--link360-text); margin-bottom: 5px;">Receita Total</p>
+                            <strong style="color: var(--link360-success); font-size: 1.2em;">R$ 15.4K</strong>
+                            <p style="font-size: 0.7em; color: #999;">Incluindo vendas de sushi</p>
+                        </div>
+                        <div class="metric-card">
+                            <p style="font-size: 0.7em; color: var(--link360-text); margin-bottom: 5px;">Despesas</p>
+                            <strong style="color: var(--link360-error); font-size: 1.2em;">R$ 7.1K</strong>
+                            <p style="font-size: 0.7em; color: #999;">Boletos com vencimento</p>
+                        </div>
+                        <div class="metric-card">
+                            <p style="font-size: 0.7em; color: var(--link360-text); margin-bottom: 5px;">Fluxo de Caixa</p>
+                            <strong style="color: var(--link360-purple); font-size: 1.2em;">R$ 8.3K</strong>
+                            <p style="font-size: 0.7em; color: #999;">Atualizado Automaticamente</p>
+                        </div>
+                    </div>
+                    <!-- Simulação de DRE e Lucro --><div class="financeiro-summary">
+                        <p style="font-size: 0.8em; color: var(--link360-dark-text); margin-bottom: 5px; font-weight: 600;">Projeção DRE (Lucro)</p>
+                        <strong style="color: var(--link360-success); font-size: 1.4em;">+3.2%</strong>
+                        <p style="font-size: 0.7em; color: #999;">Baseado em dados reais.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter7" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11 (Gestão de Marketing - Original 8) -->
+        <div class="slide slide-8" id="slide-8">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title highlight-lavender">Gestão de Marketing</h1>
+                <p class="link360-subtitle">
+                    Planeje, execute e acompanhe suas promoções de forma rápida e eficiente com campanhas prontas.
+                </p>
+                
+                <div class="link360-card-mockup" style="padding: 20px;">
+                    <div class="card-header">Calendário de Campanhas</div>
+                    <div class="campaign-item campaign-status-color-success">
+                        <div>
+                            <strong>Oferta Especial de Sushi</strong>
+                            <span>Promoção Ativa - Fim em 3 dias</span>
+                        </div>
+                    </div>
+                    <div class="campaign-item campaign-status-color-purple">
+                         <div>
+                            <strong>Campanha de Dia das Mães</strong>
+                            <span>Pronta para Agendamento - 05/2026</span>
+                        </div>
+                    </div>
+                    <div class="campaign-item campaign-status-color-lavender">
+                        <div>
+                            <strong>Promoção de Inverno</strong>
+                            <span>Draft / Em Edição - Iniciar: 06/2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter8" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 (Gestão de Clientes - Original 9) -->
+        <div class="slide slide-9" id="slide-9">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title">Gestão de Clientes</h1>
+                <p class="link360-subtitle">
+                    Cadastro completo, histórico de compras, interações e dados para fidelização e personalização.
+                </p>
+                
+                <div class="link360-profile-mockup">
+                    <div class="card-header">
+                        <div class="profile-avatar">J</div>
+                        <div class="profile-info">
+                            <strong>Jane Cooper</strong>
+                            <span>Cliente Ouro</span>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <strong>Histórico de Compras:</strong>
+                        <p>3x Produto A, 1x Produto B</p>
+                        <strong>Última Interação:</strong>
+                        <p>Contato via Suporte (15/11/2025)</p>
+                        <strong>Dados:</strong>
+                        <p>+55 (11) 98765-4321</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span id="slideCounter9" class="slide-counter-text"></span>
+                <div class="dots-wrapper">
+                    <!-- 12 Dots para 12 slides de conteúdo -->
+                    <span class="dot" onclick="showSlide(2)"></span>
+                    <span class="dot" onclick="showSlide(3)"></span>
+                    <span class="dot" onclick="showSlide(4)"></span>
+                    <span class="dot" onclick="showSlide(5)"></span>
+                    <span class="dot" onclick="showSlide(6)"></span>
+                    <span class="dot" onclick="showSlide(7)"></span>
+                    <span class="dot" onclick="showSlide(8)"></span>
+                    <span class="dot" onclick="showSlide(9)"></span>
+                    <span class="dot" onclick="showSlide(10)"></span>
+                    <span class="dot" onclick="showSlide(11)"></span>
+                    <span class="dot" onclick="showSlide(12)"></span>
+                    <span class="dot" onclick="showSlide(13)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13 (Finalização) -->
+        <div class="slide slide-13" id="slide-13">
+            <div class="header-logo">link360</div>
+            <div class="content">
+                <h1 class="link360-title highlight-lavender">Uma Gestão 360°</h1>
+                <p class="link360-subtitle" style="margin-bottom: 0;">
+                    A Link360 oferece mais de 25 ferramentas para transformar a gestão do seu restaurante.
+                    <br><br>
+                    Você escolhe o que quer usar, organiza as funcionalidades e personaliza tudo — exatamente do seu jeito.
+                </p>
+                <p class="closing-tagline">
+                    Uma visão completa.
+                    <br>
+                    Tudo em um só lugar: <strong>link360</strong>.
+                </p>
+            </div>
+            <!-- Sem indicador de slide, é o final -->
+        </div>
+
+    </div>
+
+    <script>
+        const totalSlides = 13; // 1 Splash + 12 Conteúdo
+        let currentSlideIndex = 1;
+        const appContainer = document.getElementById('appContainer');
+        const totalContentSlides = totalSlides - 1; // 12 slides de conteúdo
+
+        /* Mapeamento da ordem visual para o ID real do slide
+        -----------------------------------------------------------------------------------
+        Ordem Visual | ID do Slide | Descrição
+        -----------------------------------------------------------------------------------
+        1 (Capa)     | slide-1     | Capa (Não tem dot)
+        2 (Conteúdo) | slide-10    | Dashboard Inteligente
+        3 (Conteúdo) | slide-2     | Simplifique
+        4 (Conteúdo) | slide-3     | Porque cada empresa é única
+        5 (Conteúdo) | slide-4     | Processos Customizáveis
+        6 (Conteúdo) | slide-11    | Ficha Técnica e Custos
+        7 (Conteúdo) | slide-12    | Cardápio Link360
+        8 (Conteúdo) | slide-5     | Gestão de Documentos
+        9 (Conteúdo) | slide-6     | Agenda e Lembretes
+        10 (Conteúdo)| slide-7     | Financeiro Integrado
+        11 (Conteúdo)| slide-8     | Gestão de Marketing
+        12 (Conteúdo)| slide-9     | Gestão de Clientes
+        13 (Conteúdo)| slide-13    | Finalização
+        -----------------------------------------------------------------------------------
+        */
+        const slideIdMap = {
+            1: 'slide-1',
+            2: 'slide-10', // Dashboard
+            3: 'slide-2',  // Simplifique
+            4: 'slide-3',  // Única
+            5: 'slide-4',  // Customizáveis
+            6: 'slide-11', // Ficha Técnica
+            7: 'slide-12', // Cardápio
+            8: 'slide-5',  // Documentos
+            9: 'slide-6',  // Agenda
+            10: 'slide-7', // Financeiro
+            11: 'slide-8', // Marketing
+            12: 'slide-9', // Clientes
+            13: 'slide-13' // Finalização
+        };
+
+        // Função principal para mostrar um slide específico
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            // Garante que n esteja dentro dos limites
+            if (n < 1) { currentSlideIndex = totalSlides; }
+            else if (n > totalSlides) { currentSlideIndex = 1; } // Loop de volta para o 1
+            else { currentSlideIndex = n; }
+
+            // Esconde todos os slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            // Remove 'active' de todos os dots (em todos os indicadores)
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Mostra o slide atual baseado no mapeamento
+            const activeSlideId = slideIdMap[currentSlideIndex];
+            const activeSlide = document.getElementById(activeSlideId);
+            if (activeSlide) {
+                activeSlide.classList.add('active');
+            }
+            
+            // Ativa os dots corretos em TODOS os indicadores (Slides 2-13)
+            if (currentSlideIndex > 1) { 
+                // O índice do dot é baseado no slide de conteúdo (começa em 1)
+                const dotIndex = currentSlideIndex - 2; 
+
+                const allDotWrappers = document.querySelectorAll('.dots-wrapper');
+                allDotWrappers.forEach(wrapper => {
+                    const dotToActivate = wrapper.children[dotIndex];
+                    if (dotToActivate) {
+                        dotToActivate.classList.add('active');
+                    }
+                });
+            }
+
+            // Atualiza o contador de slides (Apenas nos slides 2-13)
+            for (let i = 2; i <= totalSlides; i++) { // Começa do 2
+                const slideKey = slideIdMap[i].replace('slide-', '');
+                const counterElement = document.getElementById(`slideCounter${slideKey}`);
+                if (counterElement) {
+                    const currentNavSlide = currentSlideIndex > 1 ? currentSlideIndex - 1 : 1;
+                    
+                    // Não mostra contador no slide final
+                    if(currentSlideIndex === 13) {
+                         counterElement.textContent = "";
+                    } else {
+                         // O contador mostra a posição no conjunto de slides de conteúdo (1 a 12)
+                         counterElement.textContent = `Slide ${currentNavSlide} de ${totalContentSlides}`;
+                    }
+                }
+            }
+        }
+
+        // Navegação por clique na tela (apenas no container principal)
+        appContainer.addEventListener('click', (event) => {
+            // Impedir clique se o alvo for um dot, para permitir navegação manual
+            if (event.target.classList.contains('dot')) {
+                return;
+            }
+            showSlide(currentSlideIndex + 1);
+        });
+
+        // Inicia o slideshow no primeiro slide
+        showSlide(1);
+    </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
